@@ -6,4 +6,13 @@
 
 <h1>Контакты</h1>
 
+
+{% for contact in contacts %}
+
+<h2>Продавец {{contact.first_name}} {{ contact.last_name }}</h2>
+<p>
+    Phone: {{contact.phone_number}}, email: {{contact.email}}
+</p>
+{% endfor %}
+
 {% endblock content %}
