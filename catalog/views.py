@@ -1,16 +1,25 @@
 from django.shortcuts import render
-from .models import Product
 from django.views.generic.list import ListView
-from .models import Contact
+from .models import Product, Category, Contact
 
 
-def index(request):
-    print("Просто ради забавы в консоль")
-    product_list = Product.objects.all()
-    for product_item in product_list[:5]:
-        print(product_item.__dict__)
+def product_list(request):
+    products = Product.objects.all()
+    context = {
+        "title": "Список всех товаров",
+        "products": products,
+    }
+    return render(request, "catalog/product_list.html", context=context)
 
-    return render(request, "catalog/index.html")
+
+def product_detail(request, pk):
+    product = Product.objects.get(pk=pk)
+    print(product)
+    context = {
+        "title": "Подробнее о ...",
+        "product": product,
+    }
+    return render(request, "catalog/product_detail.html", context=context)
 
 
 class ContactList(ListView):

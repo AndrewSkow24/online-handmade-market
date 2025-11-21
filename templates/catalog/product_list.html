@@ -1,0 +1,38 @@
+<!--  -->
+{% extends 'base.html' %}
+<!--  -->
+{% load my_tags %}
+<!--  -->
+{% block title %} Список товаров {% endblock title %}
+<!--  -->
+{% block content %}
+
+<h2>Все продукты</h2>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for product in products %}
+  <div class="col">
+    <div class="card h-100">
+      <a href="/product/{{product.pk}}/"
+        ><img
+          src="{{ product.image | media_filter }}"
+          class="card-img-top"
+          alt="..."
+        />
+      </a>
+
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name|truncatechars:10 }}</h5>
+        <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-body-secondary">
+          Обновлено: {{ product.updated_at }}
+        </small>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}

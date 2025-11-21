@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+<!--  -->
+
+{% load my_tags %}
+<!--  -->
+{% block title %} Подробнее о {{ product.name }} {%endblock title %}
+
+<!--  -->
+{% block content %}
+
+<div class="card mb-3">
+  <img
+    src="{{ product.image | media_filter }}"
+    class="card-img-top"
+    alt="Фото продукта"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name }}</h5>
+    <p class="card-text">{{ product.description }}</p>
+    <p class="card-text">Категория: {{ product.category }}</p>
+    <p class="card-text">Цена: {{ product.price }} руб.</p>
+
+    <p class="card-text">
+      <small class="text-body-secondary"
+        >Обновлено: {{ product.updated_at }}</small
+      >
+    </p>
+
+    <p class="card-text">
+      <small class="text-body-secondary"
+        >Создано: {{ product.created_at }}</small
+      >
+    </p>
+  </div>
+
+  {% endblock %}
+</div>
