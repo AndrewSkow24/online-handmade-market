@@ -8,7 +8,7 @@ class Post(models.Model):
     """
 
     title = models.CharField(max_length=255, verbose_name="Заголовок")
-    slug = models.CharField(max_length=255, verbose_name="slug", **NULLABLE)
+    slug = models.CharField(max_length=255, verbose_name="slug")
     body = models.TextField(verbose_name="Содержимое")
     preview = models.ImageField(
         upload_to="blog/", verbose_name="Изображение", **NULLABLE

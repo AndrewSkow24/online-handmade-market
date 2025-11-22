@@ -12,9 +12,9 @@ urlpatterns = [
     #     С
     path("new/", views.PostCreateView.as_view(), name="post_create"),
     #     R
-    path("<int:pk>/", views.PostDetailView.as_view(), name="post_detail"),
+    path("<slug:slug>/", views.PostDetailView.as_view(), name="post_detail"),
     #     U
-    path("<int:pk>/update/", views.PostUpdateView.as_view(), name="post_update"),
+    path("<slug:slug>/update/", views.PostUpdateView.as_view(), name="post_update"),
     #     D
-    path("<int:pk>/delete/", PostDeleteView.as_view(), name="post_delete"),
+    path("<slug:slug>/delete/", PostDeleteView.as_view(), name="post_delete"),
 ]

@@ -29,8 +29,8 @@
             <p class="fs-3 py-4">{{ object.body}}</p>
 
             <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
-              <a href="{% url 'blog:post_update' object.pk %}"type="button" class="btn btn-outline-warning">Редактировать</a>
-              <a href="{% url 'blog:post_delete' object.pk %}"type="button" class="btn btn-outline-danger">Удалить</a>
+              <a href="{% url 'blog:post_update' object.slug %}"type="button" class="btn btn-outline-warning">Редактировать</a>
+              <a href="{% url 'blog:post_delete' object.slug %}"type="button" class="btn btn-outline-danger">Удалить</a>
               <a href="{% url 'blog:post_list' %}"type="button" class="btn btn-outline-primary">К другим статьям</a>
             </div>
 
