@@ -11,7 +11,10 @@
 
   <body>
     <div class="container py-3">
-      {% include "include/header.html" %}
+      {% block header %}
+        {% include "include/header.html" %}
+      {% endblock header %}
+
       <main>
         {% block content %}
         <!--  -->

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load my_tags %}
+
+{% block title %}
+
+Подтвердить удаление
+
+{% endblock title %}
+
+{% block content %}
+
+<div class="card">
+
+
+
+        <div class="card-body">
+
+            <h3 class="card-title">Подтверждение удаления</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <p>Подтверждаете удаление записи "{{ object }}"</p>
+                <p>
+                    <button class="btn btn-danger" type="submit">Удалить</button>
+
+                    <a href="{% url 'catalog:product_list' %} "class="btn btn-primary" >Отмена</a>
+                </p>
+            </form>
+        </div>
+
+{% endblock content %}

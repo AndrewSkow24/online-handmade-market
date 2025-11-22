@@ -1,25 +1,45 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic.list import ListView
-from .models import Product, Category, Contact
+from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
+from .models import Product, Contact
 
 
-def product_list(request):
-    products = Product.objects.all()
-    context = {
-        "title": "Список всех товаров",
-        "products": products,
-    }
-    return render(request, "catalog/product_list.html", context=context)
+class ProductCreateView(CreateView):
+    model = Product
+    fields = (
+        "name",
+        "description",
+        "image",
+        "category",
+        "price",
+    )
+    success_url = reverse_lazy("catalog:product_list")
 
 
-def product_detail(request, pk):
-    product = Product.objects.get(pk=pk)
-    print(product)
-    context = {
-        "title": "Подробнее о ...",
-        "product": product,
-    }
-    return render(request, "catalog/product_detail.html", context=context)
+class ProductListView(ListView):
+    model = Product
+
+
+class ProductDetailView(DetailView):
+    model = Product
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = (
+        "name",
+        "description",
+        "image",
+        "category",
+        "price",
+    )
+    success_url = reverse_lazy("catalog:product_list")
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy("catalog:product_list")
 
 
 class ContactList(ListView):

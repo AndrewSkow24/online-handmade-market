@@ -7,32 +7,40 @@
 <!--  -->
 {% block content %}
 
-<h2>Все продукты</h2>
+  <h2>Все продукты</h2>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  {% for product in products %}
-  <div class="col">
-    <div class="card h-100">
-      <a href="/product/{{product.pk}}/"
-        ><img
-          src="{{ product.image | media_filter }}"
-          class="card-img-top"
-          alt="..."
-        />
-      </a>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for product in product_list %}
+      <div class="col">
+        <div class="card h-100">
+          <a href="{% url 'catalog:product_detail' product.pk  %}"><img
+            src="{{ product.image | media_filter }}"
+            class="card-img-top"
+            alt="..."
+          />
+          </a>
 
-      <div class="card-body">
-        <h5 class="card-title">{{ product.name|truncatechars:10 }}</h5>
-        <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name|truncatechars:10 }}</h5>
+            <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+              <p>
+            <div class="d-flex flex-wrap gap-2" role="group" >
+              <a href="{% url 'catalog:product_detail' product.pk %}" type="button" class="btn btn-outline-primary">Просмотреть</a>
+              <a href="{% url 'catalog:product_update' product.pk %}" type="button" class="btn btn-outline-warning">Редактировать</a>
+              <a href="{% url 'catalog:product_delete' product.pk %}" type="button" class="btn btn-outline-danger">Удалить</a>
+            </div>
+          </p>
+          </div>
+
+
+          <div class="card-footer">
+            <small class="text-body-secondary">
+              Обновлено: {{ product.updated_at }}
+            </small>
+          </div>
+        </div>
       </div>
-      <div class="card-footer">
-        <small class="text-body-secondary">
-          Обновлено: {{ product.updated_at }}
-        </small>
-      </div>
-    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
 
 {% endblock content %}

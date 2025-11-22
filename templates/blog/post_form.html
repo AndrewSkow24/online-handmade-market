@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %} Блог о ручной работе {% endblock title %}
+
+{% block header %}
+
+    {% include 'include/header_blog.html' %}
+
+{% endblock header %}
+
+{% block content %}
+
+    <div class="container py-4">
+        <div class="row justify-content-md-center">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            {% if object %}
+                            Редактирование
+                            {% else %}
+                            Создание поста в блоге
+                            {% endif %}
+                        </h3>
+
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+
+                        <button type="submit" class="btn btn-success">
+                            {% if not object %}
+                            Создать
+                            {% else %}
+                            Сохранить
+                            {% endif %}
+
+                        </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

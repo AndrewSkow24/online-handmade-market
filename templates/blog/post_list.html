@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load my_tags %}
+
+{% block title %} Блог о ручной работе {% endblock title %}
+
+{% block header %}
+
+{% include 'include/header_blog.html' %}
+
+{% endblock header %}
+
+{% block content %}
+<div class="container py-4">
+<div class="row">
+
+     <p style="text-align:right;">
+    <a  href="{% url 'blog:post_create' %}"
+    class="btn btn-lg btn-secondary"
+    >Новая статья</a>
+    </p>
+{% for post in object_list %}
+<div class="col-12 py-4">
+<div class="card ">
+  <div class="card-header">
+    Статья блога (автор: ...) <br>
+      Просмотрено: <b>{{ post.counter_views }}</b> раз
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ post.title }}</h5>
+<!--      Добавить ограничение слов -->
+    <p class="card-text">
+          {% if post.preview  %}
+              <img width="20%" src="{{ post.preview | media_filter }}" alt="Изображение к посту">
+            {% endif %}
+        {{ post.body|truncatechars:1000 }}</p>
+    <a href="{% url 'blog:post_detail' post.pk %}" class="btn btn-primary">Читать</a>
+  </div>
+  <div class="card-footer text-body-secondary">
+        Обновлено: {{ post.updated_at }}
+  </div>
+</div>
+</div>
+{% endfor %}
+</div>
+
+    </div>
+
+{% endblock %}

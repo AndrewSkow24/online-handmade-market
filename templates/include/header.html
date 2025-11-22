@@ -6,48 +6,55 @@
       href="/"
       class="d-flex align-items-center link-body-emphasis text-decoration-none"
     >
-<svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="40"
-    height="32"
-    class="me-2"
-    viewBox="0 0 40 32"
-    role="img"
->
-    <title>HM Market</title>
-    <text
-        x="20"
-        y="20"
-        text-anchor="middle"
-        font-family="Arial, sans-serif"
-        font-size="16"
-        font-weight="bold"
-        fill="currentColor"
-    >
-        HM
-    </text>
-</svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="32"
+        class="me-2"
+        viewBox="0 0 40 32"
+        role="img"
+      >
+        <title>HM Market</title>
+        <text
+          x="20"
+          y="20"
+          text-anchor="middle"
+          font-family="Arial, sans-serif"
+          font-size="16"
+          font-weight="bold"
+          fill="currentColor"
+        >
+          HM
+        </text>
+      </svg>
       <span class="fs-4">Handmade Market</span>
     </a>
     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#"
-        >Features</a
-      >
-      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#"
-        >Enterprise</a
-      >
-      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#"
-        >Support</a
-      >
-      <a class="py-2 link-body-emphasis text-decoration-none" href="#"
-        >Pricing</a
-      >
-    </nav>
-  </div>
-  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-    <h1 class="display-4 fw-normal text-body-emphasis">Каталог товаров ручной работы</h1>
-    <p class="fs-5 text-body-secondary">
-        Найдите необходимое для себя и закажите прямо сейчас
-    </p>
-  </div>
-</header>
+      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'catalog:product_create'  %}"
+      ><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+        <path d="M10 3V17M3 10H17" stroke-width="2" stroke-linecap="round"/>
+      </svg> Объявление </a
+        >
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/blog/">
+
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 3H21V16H7L3 20V3Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M8 8H16M8 12H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+
+          Перейти в блог</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href=""
+        >Регистрация</a
+          >
+          <a class="py-2 link-body-emphasis text-decoration-none" href="#"
+          >Вход</a
+            >
+          </nav>
+        </div>
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+          <h1 class="display-4 fw-normal text-body-emphasis">Каталог товаров ручной работы</h1>
+          <p class="fs-5 text-body-secondary">
+            Найдите необходимое для себя и закажите прямо сейчас
+          </p>
+        </div>
+      </header>
