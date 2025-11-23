@@ -7,40 +7,54 @@
 <!--  -->
 {% block content %}
 
-  <h2>Все продукты</h2>
+<h2>Все продукты</h2>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="row row-cols-1 row-cols-md-3 g-4">
     {% for product in product_list %}
-      <div class="col">
+    <div class="col">
         <div class="card h-100">
-          <a href="{% url 'catalog:product_detail' product.pk  %}"><img
-            src="{{ product.image | media_filter }}"
-            class="card-img-top"
-            alt="..."
-          />
-          </a>
+            <a href="{% url 'catalog:product_detail' product.pk  %}">
+                {% if product.image %}
+                <img
+                        src="{{ product.image | media_filter }}"
+                        class="card-img-top"
+                        alt="фото товара"
+                />
+                {% else %}
+                <svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"
+                     preserveAspectRatio="xMidYMid meet">
+                    <rect width="100%" height="100%" fill="#e0e0e0"/>
+                    <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="80" fill="#999"
+                          text-anchor="middle" dy="0.35em">?
+                    </text>
+                </svg>
+                {% endif %}
+            </a>
 
-          <div class="card-body">
-            <h5 class="card-title">{{ product.name|truncatechars:10 }}</h5>
-            <p class="card-text">{{ product.description|truncatechars:100 }}</p>
-              <p>
-            <div class="d-flex flex-wrap gap-2" role="group" >
-              <a href="{% url 'catalog:product_detail' product.pk %}" type="button" class="btn btn-outline-primary">Просмотреть</a>
-              <a href="{% url 'catalog:product_update' product.pk %}" type="button" class="btn btn-outline-warning">Редактировать</a>
-              <a href="{% url 'catalog:product_delete' product.pk %}" type="button" class="btn btn-outline-danger">Удалить</a>
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name|truncatechars:10 }}</h5>
+                <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                <p>
+                <div class="d-flex flex-wrap gap-2" role="group">
+                    <a href="{% url 'catalog:product_detail' product.pk %}" type="button"
+                       class="btn btn-outline-primary">Просмотреть</a>
+                    <a href="{% url 'catalog:product_update' product.pk %}" type="button"
+                       class="btn btn-outline-warning">Редактировать</a>
+                    <a href="{% url 'catalog:product_delete' product.pk %}" type="button"
+                       class="btn btn-outline-danger">Удалить</a>
+                </div>
+                </p>
             </div>
-          </p>
-          </div>
 
 
-          <div class="card-footer">
-            <small class="text-body-secondary">
-              Обновлено: {{ product.updated_at }}
-            </small>
-          </div>
+            <div class="card-footer">
+                <small class="text-body-secondary">
+                    Обновлено: {{ product.updated_at }}
+                </small>
+            </div>
         </div>
-      </div>
+    </div>
     {% endfor %}
-  </div>
+</div>
 
 {% endblock content %}

@@ -10,31 +10,41 @@
 {% block content %}
 
 <div class="card mb-3">
-  <img
-    src="{{ object.image | media_filter }}"
-    class="card-img-top"
-    alt="Фото продукта"
-  />
-  <div class="card-body">
-    <h5 class="card-title">{{ object.name }}</h5>
-    <p class="card-text">{{ object.description }}</p>
-    <p class="card-text">Категория: {{ object.category }}</p>
-    <p class="card-text">Цена: {{ object.price }} руб.</p>
+    {% if object.image %}
+    <img
+            src="{{ object.image | media_filter }}"
+            class="card-img-top"
+            alt="Фото продукта"
+    />
+    {% else %}
+    <svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"
+         preserveAspectRatio="xMidYMid meet">
+        <rect width="100%" height="100%" fill="#e0e0e0"/>
+        <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="80" fill="#999" text-anchor="middle"
+              dy="0.35em">?
+        </text>
+    </svg>
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{ object.name }}</h5>
+        <p class="card-text">{{ object.description }}</p>
+        <p class="card-text">Категория: {{ object.category }}</p>
+        <p class="card-text">Цена: {{ object.price }} руб.</p>
 
-    <p class="card-text">
-      <small class="text-body-secondary"
-        >Обновлено: {{ object.updated_at }}</small
-      >
-    </p>
+        <p class="card-text">
+            <small class="text-body-secondary"
+            >Обновлено: {{ object.updated_at }}</small
+            >
+        </p>
 
-    <p class="card-text">
-      <small class="text-body-secondary"
-        >Создано: {{ object.created_at }}</small
-      >
-    </p>
+        <p class="card-text">
+            <small class="text-body-secondary"
+            >Создано: {{ object.created_at }}</small
+            >
+        </p>
 
-      <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Назад к товарам</a>
-  </div>
+        <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Назад к товарам</a>
+    </div>
 
-  {% endblock %}
+    {% endblock %}
 </div>

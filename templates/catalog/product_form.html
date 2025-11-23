@@ -1,40 +1,84 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% load my_tags %}
 
 {% block title %}
 
-    {% if object %}
+{% if object %}
 
-        Редактирование {{ object }}
-    {% else %}
-        Создание
-    {% endif %}
+Редактирование {{ object }}
+{% else %}
+Создание
+{% endif %}
 
 {% endblock title %}
 
 {% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
 
-    <div class="card">
+    <div class="container">
+        <div class="row">
 
 
+            <!--Карточка 1 основная-->
+            <div class="col-6">
+                <div class="card">
 
-        <div class="card-body">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            {% if object %}
+                            Редактирование
+                            {% else %}
+                            Создание нового
+                            {% endif %}
+                            объявления</h3>
+                    </div>
 
-            <h3 class="card-title">Создание нового объявления</h3>
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
 
-                {% if object %}
-                    <button class="btn btn-primary" type="submit">Сохранить</button>
+                    <div class="card-body">
 
-                {% else %}
-                    <button class="btn btn-primary" type="submit">Создать</button>
-                {% endif %}
-            </form>
+                        {{ form }}
+
+
+                    </div>
+
+                    <div class="card-footer">
+                        {% if object %}
+                        <button class="btn btn-primary" type="submit">Сохранить</button>
+
+                        {% else %}
+                        <button class="btn btn-primary" type="submit">Создать</button>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+
+            <!--Карточка 2 версии -->
+            <div class="col-6">
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">Версии продукта</h3>
+                    </div>
+
+
+                    <div class="card-body">
+                        {{ formset.management_form }}
+                        {% for form in formset.forms %}
+                        {{ form|crispy }}
+                        <hr>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+            </div>
         </div>
-
     </div>
+</form>
+
 
 {% endblock content %}

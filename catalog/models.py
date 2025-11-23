@@ -41,6 +41,15 @@ class Product(models.Model):
         verbose_name_plural = "Продукты"
 
 
+class Version(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, verbose_name="Продукт"
+    )
+    version_num = models.PositiveSmallIntegerField(verbose_name="Номер версии")
+    version_name = models.CharField(max_length=64, verbose_name="Название версии")
+    is_actual = models.BooleanField(default=False, verbose_name="Текущая версия")
+
+
 class Contact(models.Model):
     first_name = models.CharField(max_length=255, verbose_name="Имя")
     last_name = models.CharField(max_length=255, verbose_name="Фамилия")
