@@ -49,7 +49,17 @@
 
             <div class="card-footer">
                 <small class="text-body-secondary">
-                    Обновлено: {{ product.updated_at }}
+                    Обновлено: {{ product.updated_at }} <br>
+
+
+                    {% for version in product.versions.all  %}
+                    {% if version.is_actual %}
+                    Актуальная версия: {{ version.version_num }}
+                    {% endif %}
+                    {% endfor %}
+
+
+
                 </small>
             </div>
         </div>
