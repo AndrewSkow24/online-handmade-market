@@ -149,6 +149,25 @@ files = [
 django = ">=4.2"
 
 [[package]]
+name = "django-phonenumber-field"
+version = "8.4.0"
+description = "An international phone number field for django models."
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "django_phonenumber_field-8.4.0-py3-none-any.whl", hash = "sha256:7a1cb3a6456edb54d879f11ffa0acb227ded08c93b587035d0f28093f0e46511"},
+    {file = "django_phonenumber_field-8.4.0.tar.gz", hash = "sha256:2b83e843dac35eec6a69880a166487235b737a71a1e38c9a52e5ad67d6996083"},
+]
+
+[package.dependencies]
+Django = ">=4.2"
+
+[package.extras]
+phonenumbers = ["phonenumbers (>=7.0.2)"]
+phonenumberslite = ["phonenumberslite (>=7.0.2)"]
+
+[[package]]
 name = "djhtml"
 version = "3.0.10"
 description = "Django/Jinja template indenter"
@@ -507,4 +526,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14"
-content-hash = "86b5608db28d76bdf61b1614992bed5b130b419fbd219cc3e0c034ae306e02ba"
+content-hash = "49aa5b007264b2dc25442e2d967c5b166045c3a6dcc666b19817c969033922f9"
