@@ -10,7 +10,7 @@
     {% csrf_token %}
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Вход</h3>
@@ -23,7 +23,7 @@
                         <button type="submit" class="btn btn-outline-success">Залогиниться</button>
                         </p>
                         <small>Забыли пароль ? Можете
-                            <a href="#" class="text">сбросить</a> !
+                            <a href="{% url 'users:reset_password' %}" class="text">сбросить</a> !
                         </small>
                     </div>
                 </div>

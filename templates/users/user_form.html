@@ -14,7 +14,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
@@ -31,6 +31,15 @@
 
                         {% csrf_token %}
                         {{ form|crispy }}
+                    <p>
+                        {% if user.is_authenticated %}
+                        {% else %}
+                        После регистрации проверьте адрес электронной почты,
+                        перед первым входом будет необходимо подтверждение электронной почты.
+                        {% endif %}
+                    </p>
+
+
                     </div>
 
                     <div class="card-footer">
@@ -49,6 +58,7 @@
             </div>
         </div>
     </div>
+
 
 
     {% endblock content %}

@@ -5,26 +5,38 @@ from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
 from .models import Product, Contact, Version
 from .forms import ProductForm, VersionForm
 from django.forms import inlineformset_factory
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("catalog:product_list")
+    login_url = reverse_lazy("users:login")
+
+    def form_valid(self, form):
+        product = form.save()
+        # автоматическая привязка пользователя при создании
+        product.owner = self.request.user
+        product.save()
+        return super().form_valid(form)
 
 
 class ProductListView(ListView):
     model = Product
+    queryset = Product.objects.all().order_by("-updated_at")
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
+    login_url = reverse_lazy("users:login")
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("catalog:product_list")
+    login_url = reverse_lazy("users:login")
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -54,9 +66,10 @@ class ProductUpdateView(UpdateView):
             )
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy("catalog:product_list")
+    login_url = reverse_lazy("users:login")
 
 
 class ContactList(ListView):

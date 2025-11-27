@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Сброс пароля
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Сброс пароля</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Пожалуйста, укажите электронную почту для сброса пароля</p>
+                        {{ form | crispy }}
+                        <p>
+                            Новый пароль будет выслан на указанный адрес электронной почты
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-outline-danger">Cбросить пароль</button>
+                    </div>
+
+
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
