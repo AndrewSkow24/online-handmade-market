@@ -1,14 +1,14 @@
-from pyexpat.errors import messages
-
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
-from .models import Product, Contact, Version
+from .models import Product, Contact, Version, Category
 from .forms import ProductForm, VersionForm, ProductModerForm
 from django.forms import inlineformset_factory
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from .services import get_products_by_category
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -30,9 +30,15 @@ class ProductListView(ListView):
     queryset = Product.objects.all().order_by("-updated_at")
 
 
-class ProductDetailView(LoginRequiredMixin, DetailView):
+class ProductListCategoryView(ListView):
     model = Product
-    login_url = reverse_lazy("users:login")
+
+    def get_queryset(self):
+        return get_products_by_category(self.kwargs["category_pk"])
+
+
+class ProductDetailView(DetailView):
+    model = Product
 
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
@@ -87,6 +93,10 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy("catalog:product_list")
     login_url = reverse_lazy("users:login")
+
+
+class CategoryListView(ListView):
+    model = Category
 
 
 class ContactList(ListView):
