@@ -31,6 +31,15 @@ class ProductForm(StyledFormMixin, forms.ModelForm):
         model = Product
         exclude = ["owner"]
 
+
+class ProductModerForm(StyledFormMixin, forms.ModelForm):
+    class Meta:
+        model = Product
+        # может отменять публикацию продукта,
+        # может менять описание любого продукта,
+        # может менять категорию любого продукта.
+        fields = ["is_published", "description", "category"]
+
     def clean_name(self):
         cleaned_name = self.cleaned_data.get("name")
 

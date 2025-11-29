@@ -1,9 +1,12 @@
+from pyexpat.errors import messages
+
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
 from .models import Product, Contact, Version
-from .forms import ProductForm, VersionForm
+from .forms import ProductForm, VersionForm, ProductModerForm
 from django.forms import inlineformset_factory
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -64,6 +67,20 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             return self.render_to_response(
                 self.get_context_data(form=form, formset=formset)
             )
+
+    def get_form_class(self):
+        user = self.request.user
+
+        if user == self.object.owner:
+            return ProductForm
+        if (
+            user.has_perm("catalog.can_cancel_publish")
+            and user.has_perm("catalog.can_change_category")
+            and user.has_perm("catalog.can_change_description")
+        ):
+            return ProductModerForm
+        else:
+            raise PermissionDenied
 
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
